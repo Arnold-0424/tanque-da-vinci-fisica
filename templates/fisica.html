@@ -3,355 +3,476 @@
 {% block title %}Física II - Da Vinci's War Tank{% endblock %}
 
 {% block content %}
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <h4>Aplicación de Física II al tanque de Leonardo da Vinci</h4>
-            <p>
-                Esta sección del proyecto permite analizar el tanque de Leonardo da Vinci a partir de
-                conceptos vistos en Física II. El aplicativo relaciona el movimiento del tanque con temas
-                como cinemática, dinámica, trabajo, energía mecánica, presión y eficiencia energética.
-                De este modo, el invento se convierte en un caso práctico para estudiar cómo actúan las
-                fuerzas, cómo se transforma la energía y cómo influyen variables como la fricción, la
-                inclinación del terreno y la resistencia del aire.
-            </p>
+<div class="container py-4">
+
+    <div class="mb-4">
+        <h3>Aplicación de Física II al tanque de Leonardo da Vinci</h3>
+        <p class="text-muted">
+            Esta sección permite analizar el tanque de Leonardo da Vinci como un caso práctico
+            para aplicar conceptos de Física II. La plataforma relaciona el movimiento, las fuerzas,
+            la energía, la presión, el sonido y la eficiencia del sistema mediante cálculos físicos
+            e interpretaciones aplicadas al funcionamiento del tanque.
+        </p>
+    </div>
+
+    <div class="row g-3 mb-4">
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h6>Cinemática y dinámica</h6>
+                    <p class="small">Fuerza necesaria para mover el tanque.</p>
+                    <span class="badge bg-dark">F = m · a</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h6>Trabajo y energía</h6>
+                    <p class="small">Energía requerida para desplazar el tanque.</p>
+                    <span class="badge bg-dark">W = F · d</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h6>Densidad y presión</h6>
+                    <p class="small">Presión que ejerce el tanque sobre el terreno.</p>
+                    <span class="badge bg-dark">P = F / A</span>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="row mt-4">
-        <div class="col-md-12">
-            <div class="shadow rounded p-4 bg-light">
-                <h5>¿Qué deseas calcular?</h5>
-                <select id="calculo-select" class="form-select mb-4">
-                    <option value="">Selecciona un módulo</option>
-                    <option value="cinematica">Cinemática y dinámica</option>
-                    <option value="trabajo-energia">Trabajo y energía mecánica</option>
-                    <option value="presion">Presión sobre el terreno</option>
-                    <option value="eficiencia">Eficiencia energética</option>
-                    <option value="balance">Balance energético</option>
-                </select>
+    <div class="shadow rounded p-4 bg-light">
+        <h5>Selecciona un módulo de Física II</h5>
+        <p class="small text-muted">
+            Cada módulo muestra los datos de entrada, la fórmula utilizada, el reemplazo,
+            el resultado y una interpretación física relacionada con el tanque.
+        </p>
 
-                <!-- CINEMÁTICA Y DINÁMICA -->
-                <div id="cinematica" class="variables-section" style="display: none;">
-                    <h6>Cinemática y dinámica</h6>
+        <select id="calculo-select" class="form-select mb-4">
+            <option value="">Selecciona un módulo</option>
+            <option value="cinematica">Cinemática y dinámica</option>
+            <option value="trabajo">Trabajo y energía mecánica</option>
+            <option value="presion">Densidad y presión</option>
+            <option value="sonido">Ondas sonoras</option>
+            <option value="doppler">Efecto Doppler</option>
+            <option value="eficiencia">Eficiencia energética</option>
+            <option value="balance">Primera ley de la termodinámica</option>
+        </select>
+
+        <!-- CINEMÁTICA -->
+        <div id="cinematica" class="variables-section" style="display:none;">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h5>Cinemática y dinámica</h5>
                     <p>
-                        Este módulo relaciona la velocidad lineal y angular del tanque, además de calcular
-                        la fuerza neta y la fuerza aproximada que debe ejercer el sistema para moverlo.
+                        Este módulo permite estudiar la fuerza necesaria para generar movimiento en el tanque.
+                        La masa representa la estructura del tanque y la aceleración representa el cambio
+                        de velocidad durante su desplazamiento.
                     </p>
 
+                    <div class="alert alert-secondary">
+                        <strong>Fórmula:</strong> F = m · a <br>
+                        <strong>Valores sugeridos:</strong> masa = 500 kg, aceleración = 1.5 m/s²
+                    </div>
+
                     <label class="form-label">Masa del tanque (kg):</label>
-                    <input type="number" id="cinematica-m" class="form-control mb-3" placeholder="Ejemplo: 500" />
-
-                    <label class="form-label">Velocidad lineal (m/s):</label>
-                    <input type="number" id="cinematica-v" class="form-control mb-3" placeholder="Ejemplo: 2" />
-
-                    <label class="form-label">Velocidad angular (rad/s):</label>
-                    <input type="number" id="cinematica-omega" class="form-control mb-3" placeholder="Ejemplo: 4" />
+                    <input type="number" id="cin-m" class="form-control mb-3" placeholder="Ejemplo: 500">
 
                     <label class="form-label">Aceleración (m/s²):</label>
-                    <input type="number" id="cinematica-a" class="form-control mb-3" placeholder="Ejemplo: 1.5" />
+                    <input type="number" id="cin-a" class="form-control mb-3" placeholder="Ejemplo: 1.5">
 
-                    <label class="form-label">Coeficiente de fricción:</label>
-                    <input type="number" id="cinematica-mu" class="form-control mb-3" placeholder="Ejemplo: 0.2" />
-
-                    <label class="form-label">Inclinación del terreno (grados):</label>
-                    <input type="number" id="cinematica-theta" class="form-control mb-3" placeholder="Ejemplo: 10" />
-
-                    <label class="form-label">Constante de resistencia del aire:</label>
-                    <input type="number" id="cinematica-kair" class="form-control mb-3" placeholder="Ejemplo: 0.5" />
-
-                    <button class="btn btn-primary mt-2" onclick="calcularCinematica()">Calcular</button>
-                    <div id="resultado-cinematica" class="mt-3 alert alert-info" style="display: none;"></div>
+                    <button class="btn btn-dark" onclick="calcularCinematica()">Calcular</button>
+                    <div id="res-cinematica" class="alert alert-info mt-3" style="display:none;"></div>
                 </div>
-
-                <!-- TRABAJO Y ENERGÍA MECÁNICA -->
-                <div id="trabajo-energia" class="variables-section" style="display: none;">
-                    <h6>Trabajo y energía mecánica</h6>
-                    <p>
-                        Este módulo calcula el trabajo mecánico total requerido para desplazar el tanque,
-                        así como su energía cinética y la energía potencial asociada a la inclinación del terreno.
-                    </p>
-
-                    <label class="form-label">Masa del tanque (kg):</label>
-                    <input type="number" id="trabajo-m" class="form-control mb-3" placeholder="Ejemplo: 500" />
-
-                    <label class="form-label">Velocidad lineal (m/s):</label>
-                    <input type="number" id="trabajo-v" class="form-control mb-3" placeholder="Ejemplo: 2" />
-
-                    <label class="form-label">Coeficiente de fricción del terreno:</label>
-                    <input type="number" id="trabajo-mu" class="form-control mb-3" placeholder="Ejemplo: 0.2" />
-
-                    <label class="form-label">Inclinación del terreno (grados):</label>
-                    <input type="number" id="trabajo-theta" class="form-control mb-3" placeholder="Ejemplo: 10" />
-
-                    <label class="form-label">Constante de resistencia del aire:</label>
-                    <input type="number" id="trabajo-kair" class="form-control mb-3" placeholder="Ejemplo: 0.5" />
-
-                    <button class="btn btn-primary mt-2" onclick="calcularTrabajoEnergia()">Calcular</button>
-                    <div id="resultado-trabajo" class="mt-3 alert alert-info" style="display: none;"></div>
-                </div>
-
-                <!-- PRESIÓN -->
-                <div id="presion" class="variables-section" style="display: none;">
-                    <h6>Presión sobre el terreno</h6>
-                    <p>
-                        Este módulo estima la presión que ejerce el tanque sobre la superficie de apoyo,
-                        lo cual permite relacionar el proyecto con los temas de densidad y presión vistos en clase.
-                    </p>
-
-                    <label class="form-label">Masa del tanque (kg):</label>
-                    <input type="number" id="presion-m" class="form-control mb-3" placeholder="Ejemplo: 500" />
-
-                    <label class="form-label">Área de contacto con el suelo (m²):</label>
-                    <input type="number" id="presion-a" class="form-control mb-3" placeholder="Ejemplo: 0.8" />
-
-                    <button class="btn btn-primary mt-2" onclick="calcularPresion()">Calcular</button>
-                    <div id="resultado-presion" class="mt-3 alert alert-info" style="display: none;"></div>
-                </div>
-
-                <!-- EFICIENCIA -->
-                <div id="eficiencia" class="variables-section" style="display: none;">
-                    <h6>Eficiencia energética</h6>
-                    <p>
-                        Este módulo calcula la eficiencia del sistema comparando el trabajo útil realizado
-                        con la energía o trabajo de entrada suministrado.
-                    </p>
-
-                    <label class="form-label">Trabajo útil realizado (J):</label>
-                    <input type="number" id="eficiencia-wutil" class="form-control mb-3" placeholder="Ejemplo: 1500" />
-
-                    <label class="form-label">Trabajo o energía de entrada (J):</label>
-                    <input type="number" id="eficiencia-wentrada" class="form-control mb-3" placeholder="Ejemplo: 2000" />
-
-                    <button class="btn btn-primary mt-2" onclick="calcularEficiencia()">Calcular</button>
-                    <div id="resultado-eficiencia" class="mt-3 alert alert-info" style="display: none;"></div>
-                </div>
-
-                <!-- BALANCE ENERGÉTICO -->
-                <div id="balance" class="variables-section" style="display: none;">
-                    <h6>Balance energético</h6>
-                    <p>
-                        Este módulo usa una forma sencilla de la primera ley de la termodinámica para relacionar
-                        el calor suministrado, el trabajo mecánico realizado y el cambio de energía interna del sistema.
-                    </p>
-
-                    <label class="form-label">Calor suministrado Q (J):</label>
-                    <input type="number" id="balance-q" class="form-control mb-3" placeholder="Ejemplo: 20000" />
-
-                    <label class="form-label">Trabajo mecánico W (J):</label>
-                    <input type="number" id="balance-w" class="form-control mb-3" placeholder="Ejemplo: 18188" />
-
-                    <button class="btn btn-primary mt-2" onclick="calcularBalance()">Calcular</button>
-                    <div id="resultado-balance" class="mt-3 alert alert-info" style="display: none;"></div>
-                </div>
-
             </div>
         </div>
+
+        <!-- TRABAJO -->
+        <div id="trabajo" class="variables-section" style="display:none;">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h5>Trabajo y energía mecánica</h5>
+                    <p>
+                        Este módulo calcula el trabajo necesario para desplazar el tanque y la energía
+                        cinética asociada a su movimiento.
+                    </p>
+
+                    <div class="alert alert-secondary">
+                        <strong>Fórmulas:</strong> W = F · d, Ec = 1/2 · m · v² <br>
+                        <strong>Valores sugeridos:</strong> F = 1200 N, d = 10 m, m = 500 kg, v = 2 m/s
+                    </div>
+
+                    <label class="form-label">Fuerza aplicada (N):</label>
+                    <input type="number" id="trabajo-f" class="form-control mb-3" placeholder="Ejemplo: 1200">
+
+                    <label class="form-label">Distancia recorrida (m):</label>
+                    <input type="number" id="trabajo-d" class="form-control mb-3" placeholder="Ejemplo: 10">
+
+                    <label class="form-label">Masa del tanque (kg):</label>
+                    <input type="number" id="trabajo-m" class="form-control mb-3" placeholder="Ejemplo: 500">
+
+                    <label class="form-label">Velocidad del tanque (m/s):</label>
+                    <input type="number" id="trabajo-v" class="form-control mb-3" placeholder="Ejemplo: 2">
+
+                    <button class="btn btn-dark" onclick="calcularTrabajo()">Calcular</button>
+                    <div id="res-trabajo" class="alert alert-info mt-3" style="display:none;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PRESIÓN -->
+        <div id="presion" class="variables-section" style="display:none;">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h5>Densidad y presión</h5>
+                    <p>
+                        Este módulo relaciona la masa, el volumen y el área de contacto del tanque.
+                        Sirve para analizar qué tanta presión ejerce sobre el terreno.
+                    </p>
+
+                    <div class="alert alert-secondary">
+                        <strong>Fórmulas:</strong> ρ = m / V, P = F / A <br>
+                        <strong>Valores sugeridos:</strong> m = 500 kg, V = 2.5 m³, A = 0.8 m²
+                    </div>
+
+                    <label class="form-label">Masa del tanque (kg):</label>
+                    <input type="number" id="presion-m" class="form-control mb-3" placeholder="Ejemplo: 500">
+
+                    <label class="form-label">Volumen aproximado del tanque (m³):</label>
+                    <input type="number" id="presion-v" class="form-control mb-3" placeholder="Ejemplo: 2.5">
+
+                    <label class="form-label">Área de contacto con el suelo (m²):</label>
+                    <input type="number" id="presion-a" class="form-control mb-3" placeholder="Ejemplo: 0.8">
+
+                    <button class="btn btn-dark" onclick="calcularPresion()">Calcular</button>
+                    <div id="res-presion" class="alert alert-info mt-3" style="display:none;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ONDAS SONORAS -->
+        <div id="sonido" class="variables-section" style="display:none;">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h5>Ondas sonoras</h5>
+                    <p>
+                        Este módulo analiza el sonido producido por el tanque debido al movimiento
+                        de ruedas, engranajes o partes mecánicas internas.
+                    </p>
+
+                    <div class="alert alert-secondary">
+                        <strong>Fórmula:</strong> v = f · λ <br>
+                        <strong>Valores sugeridos:</strong> f = 440 Hz, λ = 0.78 m
+                    </div>
+
+                    <label class="form-label">Frecuencia del sonido (Hz):</label>
+                    <input type="number" id="sonido-f" class="form-control mb-3" placeholder="Ejemplo: 440">
+
+                    <label class="form-label">Longitud de onda (m):</label>
+                    <input type="number" id="sonido-lambda" class="form-control mb-3" placeholder="Ejemplo: 0.78">
+
+                    <button class="btn btn-dark" onclick="calcularSonido()">Calcular</button>
+                    <div id="res-sonido" class="alert alert-info mt-3" style="display:none;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DOPPLER -->
+        <div id="doppler" class="variables-section" style="display:none;">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h5>Efecto Doppler</h5>
+                    <p>
+                        Este módulo calcula cómo cambia la frecuencia percibida del sonido cuando
+                        el tanque se acerca a un observador.
+                    </p>
+
+                    <div class="alert alert-secondary">
+                        <strong>Fórmula:</strong> f' = f · v / (v - vs) <br>
+                        <strong>Valores sugeridos:</strong> f = 440 Hz, v = 343 m/s, vs = 10 m/s
+                    </div>
+
+                    <label class="form-label">Frecuencia emitida por el tanque (Hz):</label>
+                    <input type="number" id="doppler-f" class="form-control mb-3" placeholder="Ejemplo: 440">
+
+                    <label class="form-label">Velocidad del sonido (m/s):</label>
+                    <input type="number" id="doppler-v" class="form-control mb-3" placeholder="Ejemplo: 343">
+
+                    <label class="form-label">Velocidad del tanque (m/s):</label>
+                    <input type="number" id="doppler-vs" class="form-control mb-3" placeholder="Ejemplo: 10">
+
+                    <button class="btn btn-dark" onclick="calcularDoppler()">Calcular</button>
+                    <div id="res-doppler" class="alert alert-info mt-3" style="display:none;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- EFICIENCIA -->
+        <div id="eficiencia" class="variables-section" style="display:none;">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h5>Eficiencia energética</h5>
+                    <p>
+                        Este módulo compara la energía suministrada al sistema con el trabajo útil
+                        que realmente se aprovecha para mover el tanque.
+                    </p>
+
+                    <div class="alert alert-secondary">
+                        <strong>Fórmula:</strong> η = W útil / W entrada · 100% <br>
+                        <strong>Valores sugeridos:</strong> W útil = 1500 J, W entrada = 2000 J
+                    </div>
+
+                    <label class="form-label">Trabajo útil realizado (J):</label>
+                    <input type="number" id="ef-wu" class="form-control mb-3" placeholder="Ejemplo: 1500">
+
+                    <label class="form-label">Energía de entrada (J):</label>
+                    <input type="number" id="ef-we" class="form-control mb-3" placeholder="Ejemplo: 2000">
+
+                    <button class="btn btn-dark" onclick="calcularEficiencia()">Calcular</button>
+                    <div id="res-eficiencia" class="alert alert-info mt-3" style="display:none;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BALANCE -->
+        <div id="balance" class="variables-section" style="display:none;">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h5>Primera ley de la termodinámica</h5>
+                    <p>
+                        Este módulo relaciona el calor suministrado, el trabajo realizado y el cambio
+                        de energía interna del sistema.
+                    </p>
+
+                    <div class="alert alert-secondary">
+                        <strong>Fórmula:</strong> ΔU = Q - W <br>
+                        <strong>Valores sugeridos:</strong> Q = 20000 J, W = 15000 J
+                    </div>
+
+                    <label class="form-label">Calor suministrado Q (J):</label>
+                    <input type="number" id="bal-q" class="form-control mb-3" placeholder="Ejemplo: 20000">
+
+                    <label class="form-label">Trabajo realizado W (J):</label>
+                    <input type="number" id="bal-w" class="form-control mb-3" placeholder="Ejemplo: 15000">
+
+                    <button class="btn btn-dark" onclick="calcularBalance()">Calcular</button>
+                    <div id="res-balance" class="alert alert-info mt-3" style="display:none;"></div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
 
 <script>
-    const g = 9.81;
-    const d = 10;
-    const r = 0.5;
+const g = 9.81;
 
-    document.getElementById('calculo-select').addEventListener('change', function() {
-        const selected = this.value;
-        const sections = document.querySelectorAll('.variables-section');
-        sections.forEach(section => section.style.display = 'none');
-
-        if (selected) {
-            document.getElementById(selected).style.display = 'block';
-        }
+document.getElementById("calculo-select").addEventListener("change", function () {
+    document.querySelectorAll(".variables-section").forEach(section => {
+        section.style.display = "none";
     });
 
-    function validarCampos(ids) {
-        for (let id of ids) {
-            const input = document.getElementById(id);
-            if (!input) {
-                alert(`No se encontró el campo con id: ${id}`);
-                return false;
-            }
+    if (this.value) {
+        document.getElementById(this.value).style.display = "block";
+    }
+});
 
-            const valor = input.value.trim();
-            if (valor === '') {
-                alert('Valores incompletos. Por favor ingresa todos los datos necesarios.');
-                return false;
-            }
-        }
-        return true;
+function obtenerValor(id) {
+    return parseFloat(document.getElementById(id).value);
+}
+
+function mostrarResultado(id, contenido) {
+    const resultado = document.getElementById(id);
+    resultado.innerHTML = contenido;
+    resultado.style.display = "block";
+}
+
+function calcularCinematica() {
+    const m = obtenerValor("cin-m");
+    const a = obtenerValor("cin-a");
+
+    if (isNaN(m) || isNaN(a)) {
+        alert("Por favor ingresa todos los valores.");
+        return;
     }
 
-    function calcularCinematica() {
-        const ids = ['cinematica-m', 'cinematica-v', 'cinematica-omega', 'cinematica-a', 'cinematica-mu', 'cinematica-theta', 'cinematica-kair'];
-        if (!validarCampos(ids)) return;
+    const F = m * a;
 
-        const m = parseFloat(document.getElementById('cinematica-m').value);
-        const v = parseFloat(document.getElementById('cinematica-v').value);
-        const omega = parseFloat(document.getElementById('cinematica-omega').value);
-        const a = parseFloat(document.getElementById('cinematica-a').value);
-        const mu = parseFloat(document.getElementById('cinematica-mu').value);
-        const theta = parseFloat(document.getElementById('cinematica-theta').value) * Math.PI / 180;
-        const kair = parseFloat(document.getElementById('cinematica-kair').value);
+    mostrarResultado("res-cinematica", `
+        <strong>Resultado:</strong><br>
+        Fórmula: F = m · a<br>
+        Reemplazo: F = ${m} · ${a}<br>
+        Fuerza neta: <strong>${F.toFixed(2)} N</strong><br><br>
 
-        const vCalculada = omega * r;
-        const diferenciaV = Math.abs(vCalculada - v);
+        <strong>Interpretación física:</strong><br>
+        Esta fuerza representa la fuerza necesaria para producir la aceleración del tanque.
+        Si la masa del tanque aumenta, se necesitará una fuerza mayor para lograr el mismo movimiento.
+    `);
+}
 
-        const Ff = mu * m * g * Math.cos(theta);
-        const Fp = m * g * Math.sin(theta);
-        const Fair = kair * v;
-        const Fnet = m * a;
-        const Fmotor = Fnet + Ff + Fp + Fair;
+function calcularTrabajo() {
+    const F = obtenerValor("trabajo-f");
+    const d = obtenerValor("trabajo-d");
+    const m = obtenerValor("trabajo-m");
+    const v = obtenerValor("trabajo-v");
 
-        let conclusionVelocidad = '';
-        if (diferenciaV < 0.1) {
-            conclusionVelocidad = 'La velocidad lineal dada es consistente con la velocidad angular y el radio asumido.';
-        } else {
-            conclusionVelocidad = 'La velocidad lineal dada no coincide exactamente con la relación v = ω·r para el radio asumido.';
-        }
-
-        document.getElementById('resultado-cinematica').innerHTML = `
-            <strong>1. Relación entre velocidad lineal y angular:</strong><br>
-            Ecuación base: v = ω · r<br>
-            Reemplazo: v = ${omega} · ${r}<br>
-            Resultado: v_calculada = ${vCalculada.toFixed(2)} m/s<br>
-            Velocidad ingresada: ${v.toFixed(2)} m/s<br>
-            Interpretación: ${conclusionVelocidad}<br><br>
-
-            <strong>2. Fuerza neta:</strong><br>
-            Ecuación base: F_net = m · a<br>
-            Reemplazo: F_net = ${m} · ${a}<br>
-            Resultado: F_net = ${Fnet.toFixed(2)} N<br><br>
-
-            <strong>3. Fuerza aproximada del sistema motor:</strong><br>
-            Ecuación base: F_motor = m·a + F_f + F_p + F_air<br>
-            Donde F_f = ${Ff.toFixed(2)} N, F_p = ${Fp.toFixed(2)} N, F_air = ${Fair.toFixed(2)} N<br>
-            Resultado: F_motor = ${Fmotor.toFixed(2)} N<br><br>
-
-            <strong>4. Interpretación física:</strong><br>
-            La relación entre la velocidad lineal y angular permite verificar si el movimiento del tanque es consistente con el sistema de ruedas.<br>
-            La fuerza neta indica cómo cambia el movimiento del tanque según la aceleración aplicada.<br>
-            Por otro lado, la fuerza del sistema motor representa la fuerza total que se requiere para vencer la fricción, la pendiente del terreno y la resistencia del aire, además de generar aceleración en el sistema.
-        `;
-        document.getElementById('resultado-cinematica').style.display = 'block';
+    if (isNaN(F) || isNaN(d) || isNaN(m) || isNaN(v)) {
+        alert("Por favor ingresa todos los valores.");
+        return;
     }
 
-    function calcularTrabajoEnergia() {
-        const ids = ['trabajo-m', 'trabajo-v', 'trabajo-mu', 'trabajo-theta', 'trabajo-kair'];
-        if (!validarCampos(ids)) return;
+    const W = F * d;
+    const Ec = 0.5 * m * Math.pow(v, 2);
 
-        const m = parseFloat(document.getElementById('trabajo-m').value);
-        const v = parseFloat(document.getElementById('trabajo-v').value);
-        const mu = parseFloat(document.getElementById('trabajo-mu').value);
-        const theta = parseFloat(document.getElementById('trabajo-theta').value) * Math.PI / 180;
-        const kair = parseFloat(document.getElementById('trabajo-kair').value);
+    mostrarResultado("res-trabajo", `
+        <strong>Trabajo mecánico:</strong><br>
+        Fórmula: W = F · d<br>
+        Reemplazo: W = ${F} · ${d}<br>
+        Resultado: <strong>${W.toFixed(2)} J</strong><br><br>
 
-        const Ff = mu * m * g * Math.cos(theta);
-        const Fp = m * g * Math.sin(theta);
-        const Fair = kair * v;
-        const W = (Ff + Fp + Fair) * d;
-        const Ec = 0.5 * m * Math.pow(v, 2);
-        const h = d * Math.sin(theta);
-        const Ep = m * g * h;
+        <strong>Energía cinética:</strong><br>
+        Fórmula: Ec = 1/2 · m · v²<br>
+        Reemplazo: Ec = 1/2 · ${m} · ${v}²<br>
+        Resultado: <strong>${Ec.toFixed(2)} J</strong><br><br>
 
-        document.getElementById('resultado-trabajo').innerHTML = `
-            <strong>1. Trabajo mecánico total:</strong><br>
-            Ecuación base: W = (F_f + F_p + F_air) · d<br>
-            Donde F_f = ${Ff.toFixed(2)} N, F_p = ${Fp.toFixed(2)} N, F_air = ${Fair.toFixed(2)} N<br>
-            Reemplazo: W = (${Ff.toFixed(2)} + ${Fp.toFixed(2)} + ${Fair.toFixed(2)}) · ${d}<br>
-            Resultado: W = ${W.toFixed(2)} J<br><br>
+        <strong>Interpretación física:</strong><br>
+        El trabajo representa la energía utilizada para desplazar el tanque.
+        La energía cinética indica la energía que posee el tanque debido a su movimiento.
+    `);
+}
 
-            <strong>2. Energía cinética:</strong><br>
-            Ecuación base: E_c = (1/2)mv²<br>
-            Reemplazo: E_c = 0.5 · ${m} · (${v})²<br>
-            Resultado: E_c = ${Ec.toFixed(2)} J<br><br>
+function calcularPresion() {
+    const m = obtenerValor("presion-m");
+    const V = obtenerValor("presion-v");
+    const A = obtenerValor("presion-a");
 
-            <strong>3. Energía potencial gravitacional:</strong><br>
-            Ecuación base: E_p = mgh<br>
-            Altura aproximada: h = d · sin(θ) = ${h.toFixed(2)} m<br>
-            Resultado: E_p = ${Ep.toFixed(2)} J<br><br>
-
-            <strong>4. Interpretación física:</strong><br>
-            El trabajo total calculado representa la energía necesaria para mover el tanque considerando la fricción, la pendiente y la resistencia del aire.<br>
-            Parte de esta energía se utiliza en aumentar la energía potencial del sistema y otra parte se disipa debido a las fuerzas resistivas como el rozamiento.<br>
-            Además, la energía cinética indica el movimiento del tanque, mientras que la energía potencial está asociada a la altura alcanzada en la pendiente.
-        `;
-        document.getElementById('resultado-trabajo').style.display = 'block';
+    if (isNaN(m) || isNaN(V) || isNaN(A) || V <= 0 || A <= 0) {
+        alert("Por favor ingresa valores válidos. El volumen y el área deben ser mayores que cero.");
+        return;
     }
 
-    function calcularPresion() {
-        const ids = ['presion-m', 'presion-a'];
-        if (!validarCampos(ids)) return;
+    const densidad = m / V;
+    const peso = m * g;
+    const P = peso / A;
 
-        const m = parseFloat(document.getElementById('presion-m').value);
-        const A = parseFloat(document.getElementById('presion-a').value);
+    mostrarResultado("res-presion", `
+        <strong>Densidad:</strong><br>
+        Fórmula: ρ = m / V<br>
+        Reemplazo: ρ = ${m} / ${V}<br>
+        Resultado: <strong>${densidad.toFixed(2)} kg/m³</strong><br><br>
 
-        if (A <= 0) {
-            alert('El área debe ser mayor que cero.');
-            return;
-        }
+        <strong>Presión sobre el terreno:</strong><br>
+        Fórmula: P = F / A<br>
+        Peso del tanque: F = m · g = ${m} · ${g} = ${peso.toFixed(2)} N<br>
+        Reemplazo: P = ${peso.toFixed(2)} / ${A}<br>
+        Resultado: <strong>${P.toFixed(2)} Pa</strong><br><br>
 
-        const F = m * g;
-        const P = F / A;
+        <strong>Interpretación física:</strong><br>
+        La presión indica qué tan concentrado está el peso del tanque sobre el suelo.
+        Si el área de contacto es pequeña, la presión aumenta y el tanque podría hundirse
+        con mayor facilidad en terrenos blandos.
+    `);
+}
 
-        document.getElementById('resultado-presion').innerHTML = `
-            <strong>Presión sobre el terreno:</strong><br>
-            Ecuación base: P = F / A<br>
-            Donde F = m · g = ${m} · ${g} = ${F.toFixed(2)} N<br>
-            Reemplazo: P = ${F.toFixed(2)} / ${A}<br>
-            Resultado: P = ${P.toFixed(2)} Pa<br><br>
-            <strong>Interpretación:</strong><br>
-            Este valor representa la presión que ejerce el tanque sobre la superficie de apoyo.<br>
-            A mayor presión, mayor es la posibilidad de que el tanque se hunda o pierda estabilidad en terrenos blandos.<br>
-            Por ello, el área de contacto es un factor importante en el diseño, ya que al aumentarla se reduce la presión ejercida sobre el suelo.
-        `;
-        document.getElementById('resultado-presion').style.display = 'block';
+function calcularSonido() {
+    const f = obtenerValor("sonido-f");
+    const lambda = obtenerValor("sonido-lambda");
+
+    if (isNaN(f) || isNaN(lambda) || f <= 0 || lambda <= 0) {
+        alert("Por favor ingresa valores válidos mayores que cero.");
+        return;
     }
 
-    function calcularEficiencia() {
-        const ids = ['eficiencia-wutil', 'eficiencia-wentrada'];
-        if (!validarCampos(ids)) return;
+    const v = f * lambda;
 
-        const wutil = parseFloat(document.getElementById('eficiencia-wutil').value);
-        const wentrada = parseFloat(document.getElementById('eficiencia-wentrada').value);
+    mostrarResultado("res-sonido", `
+        <strong>Velocidad de la onda sonora:</strong><br>
+        Fórmula: v = f · λ<br>
+        Reemplazo: v = ${f} · ${lambda}<br>
+        Resultado: <strong>${v.toFixed(2)} m/s</strong><br><br>
 
-        if (wentrada <= 0) {
-            alert('El trabajo de entrada debe ser mayor que cero.');
-            return;
-        }
+        <strong>Interpretación física:</strong><br>
+        Este cálculo permite relacionar la frecuencia y la longitud de onda del sonido
+        producido por el tanque. En un caso real, este sonido podría originarse por el movimiento
+        de ruedas, engranajes o mecanismos internos.
+    `);
+}
 
-        const eta = wutil / wentrada;
-        const porcentaje = eta * 100;
+function calcularDoppler() {
+    const f = obtenerValor("doppler-f");
+    const v = obtenerValor("doppler-v");
+    const vs = obtenerValor("doppler-vs");
 
-        document.getElementById('resultado-eficiencia').innerHTML = `
-            <strong>Eficiencia energética:</strong><br>
-            Ecuación base: η = W_útil / W_entrada<br>
-            Reemplazo: η = ${wutil} / ${wentrada}<br>
-            Resultado: η = ${eta.toFixed(4)} (${porcentaje.toFixed(2)}%)<br><br>
-            <strong>Interpretación:</strong><br>
-            <strong>Interpretación:</strong><br>
-            El resultado muestra el cambio de energía interna del sistema.<br>
-            No toda la energía se convierte en trabajo útil, ya que parte se pierde por fricción y resistencia del aire.
-        `;
-        document.getElementById('resultado-eficiencia').style.display = 'block';
+    if (isNaN(f) || isNaN(v) || isNaN(vs) || f <= 0 || v <= 0 || vs < 0 || v <= vs) {
+        alert("Por favor ingresa valores válidos. La velocidad del sonido debe ser mayor que la velocidad del tanque.");
+        return;
     }
 
-    function calcularBalance() {
-        const ids = ['balance-q', 'balance-w'];
-        if (!validarCampos(ids)) return;
+    const fp = f * (v / (v - vs));
 
-        const Q = parseFloat(document.getElementById('balance-q').value);
-        const W = parseFloat(document.getElementById('balance-w').value);
-        const deltaU = Q - W;
+    mostrarResultado("res-doppler", `
+        <strong>Frecuencia percibida:</strong><br>
+        Fórmula: f' = f · v / (v - vs)<br>
+        Reemplazo: f' = ${f} · ${v} / (${v} - ${vs})<br>
+        Resultado: <strong>${fp.toFixed(2)} Hz</strong><br><br>
 
-        document.getElementById('resultado-balance').innerHTML = `
-            <strong>Balance energético:</strong><br>
-            Ecuación base: ΔU = Q - W<br>
-            Reemplazo: ΔU = ${Q} - ${W}<br>
-            Resultado: ΔU = ${deltaU.toFixed(2)} J<br><br>
-            Interpretación: este valor representa el cambio de energía interna del sistema a partir del calor suministrado y el trabajo realizado.
-        `;
-        document.getElementById('resultado-balance').style.display = 'block';
+        <strong>Interpretación física:</strong><br>
+        Cuando el tanque se acerca al observador, la frecuencia percibida aumenta.
+        Por eso el sonido puede sentirse más agudo mientras la fuente sonora se aproxima.
+    `);
+}
+
+function calcularEficiencia() {
+    const Wu = obtenerValor("ef-wu");
+    const We = obtenerValor("ef-we");
+
+    if (isNaN(Wu) || isNaN(We) || We <= 0) {
+        alert("Por favor ingresa valores válidos. La energía de entrada debe ser mayor que cero.");
+        return;
     }
+
+    const eta = (Wu / We) * 100;
+
+    mostrarResultado("res-eficiencia", `
+        <strong>Eficiencia energética:</strong><br>
+        Fórmula: η = W útil / W entrada · 100%<br>
+        Reemplazo: η = ${Wu} / ${We} · 100%<br>
+        Resultado: <strong>${eta.toFixed(2)}%</strong><br><br>
+
+        <strong>Interpretación física:</strong><br>
+        La eficiencia indica qué porcentaje de la energía suministrada se convierte en trabajo útil.
+        En el tanque, una parte de la energía se pierde por fricción, sonido, calor y resistencia mecánica.
+    `);
+}
+
+function calcularBalance() {
+    const Q = obtenerValor("bal-q");
+    const W = obtenerValor("bal-w");
+
+    if (isNaN(Q) || isNaN(W)) {
+        alert("Por favor ingresa todos los valores.");
+        return;
+    }
+
+    const deltaU = Q - W;
+
+    mostrarResultado("res-balance", `
+        <strong>Primera ley de la termodinámica:</strong><br>
+        Fórmula: ΔU = Q - W<br>
+        Reemplazo: ΔU = ${Q} - ${W}<br>
+        Resultado: <strong>${deltaU.toFixed(2)} J</strong><br><br>
+
+        <strong>Interpretación física:</strong><br>
+        Este resultado representa el cambio de energía interna del sistema.
+        Si el calor suministrado es mayor que el trabajo realizado, queda energía almacenada
+        dentro del sistema. Si el trabajo es mayor, el sistema pierde energía interna.
+    `);
+}
 </script>
 {% endblock %}
